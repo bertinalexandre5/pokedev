@@ -1,4 +1,30 @@
-<h1>Pokedev</h1>
+<!-- Barre bleue tout en haut, visible seulement pendant qu'une requête HTTP
+     est en cours (voir Loading et loadingInterceptor). -->
+@if (loading.active()) {
+  <div class="progress" role="progressbar" aria-label="Chargement en cours"></div>
+}
 
+<header>
+  <!-- routerLink="/devs" : un lien interne, sans rechargement de page. -->
+  <a class="brand" routerLink="/devs">Pokedev</a>
+  <nav aria-label="Navigation principale">
+    <!-- routerLinkActive="active" ajoute la classe CSS "active" sur le lien
+         qui correspond à la page actuellement affichée (voir app.css). -->
+    <a routerLink="/devs" routerLinkActive="active" ariaCurrentWhenActive="page">Pokédex</a>
+    <a routerLink="/equipe" routerLinkActive="active" ariaCurrentWhenActive="page">
+      <!-- team.size() est un signal : ce nombre se met à jour tout seul
+           dès qu'un dev est ajouté ou retiré de l'équipe, où que ce soit
+           dans l'application (même service partagé, voir team.ts). -->
+      Mon équipe <span class="count">{{ team.size() }}</span>
+    </a>
+    <a routerLink="/creer" routerLinkActive="active" ariaCurrentWhenActive="page">Créer un dev</a>
+  </nav>
+</header>
 
+<main>
+  <!-- L'emplacement où Angular affiche la page active selon l'URL :
+       DexPage sur /devs, DevDetailPage sur /devs/11, etc. (voir app.routes.ts). -->
+  <router-outlet />
+</main>
 
+<footer>Pokedev · un pokédex de développeurs, tous fictifs.</footer>

@@ -1,46 +1,28 @@
 import { Component, computed, input, output } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { Dev } from '../../domain/dev.model';
-import { totalStats } from '../../domain/dev.rules';
+import { totalStats } from '../../domain/dev-rules';
+import { DexNumberPipe } from '../../shared/pipes/dex-number-pipe';
+import { DevAvatar } from '../../shared/ui/dev-avatar';
+import { TypeBadge } from '../../shared/ui/type-badge';
 
+// Un composant D'AFFICHAGE (pas une page) : il reçoit tout ce dont il a
+// besoin par ses entrées, et ne connaît RIEN de l'équipe ni du réseau.
+// C'est ce qui le rend réutilisable et testable tout seul.
 @Component({
   selector: 'app-dev-card',
-  template: `
-    <article class="card" [class.in-team]="inTeam()">
-      <p>#{{ dev().id }}</p>
-      <h3>{{ dev().name }}</h3>
-      <p>{{ dev().title }}</p>
-      <p>
-        @for (type of dev().types; track type) {
-          <span class="type">{{ type }}</span>
-        }
-      </p>
-      <p>Total : {{ total() }}</p>
-      <button type="button" (click)="teamToggled.emit(dev().id)">
-        {{ inTeam() ? 'Retirer de l’équipe' : 'Ajouter à l’équipe' }}
-      </button>
-    </article>
-  `,
-  styles: `
-    .card {
-      padding: 1rem;
-      border: 1px solid var(--border);
-      border-radius: 0.75rem;
-    }
-    .card.in-team {
-      border-color: var(--accent);
-      box-shadow: 0 0 0 1px var(--accent);
-    }
-    .type {
-      margin-right: 0.25rem;
-      padding: 0 0.5rem;
-      border: 1px solid var(--border);
-      border-radius: 999px;
-    }
-  `,
+  imports: [RouterLink, DexNumberPipe, DevAvatar, TypeBadge],
+  templateUrl: './dev-cards.html',
+  styleUrl: './dev-cards.css',
 })
 export class DevCard {
-  readonly dev = input.required<Dev>();
-  readonly inTeam = input(false);
+  readonly dev = input.required<Dev>(); // obligatoire : pas de carte sans dev
+  readonly inTeam = input(false); // déjà dans l'équipe ?
+  readonly teamFull = input(false); // l'équipe est-elle pleine ?
+
+  // La sortie : la carte ne fait qu'ANNONCER un clic, elle ne décide
+  // jamais d'ajouter ou de retirer elle-même (voir dev-page.ts qui
+  // écoute cet événement avec (teamToggled)="team.toggle($event)").
   readonly teamToggled = output<number>();
 
   protected readonly total = computed(() => totalStats(this.dev().stats));

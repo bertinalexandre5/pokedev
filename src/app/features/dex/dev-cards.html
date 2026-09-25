@@ -1,0 +1,30 @@
+<article class="card" [class.in-team]="inTeam()">
+  <!-- dev().types[0] : le premier type est toujours le type "principal",
+       c'est celui qui donne sa couleur à l'avatar. -->
+  <app-dev-avatar [name]="dev().name" [type]="dev().types[0]" />
+  <div class="body">
+    <p class="number">{{ dev().id | dexNumber }}</p>
+    <h3>
+      <!-- Lien vers la fiche du dev : /devs/11, /devs/8... -->
+      <a [routerLink]="['/devs', dev().id]">{{ dev().name }}</a>
+    </h3>
+    <p class="title">{{ dev().title }}</p>
+    <p class="types">
+      <!-- Un ou deux badges, selon le nombre de types du dev. -->
+      @for (type of dev().types; track type) {
+        <app-type-badge [type]="type" />
+      }
+    </p>
+    <p class="total">Total : {{ total() }}</p>
+  </div>
+  <!-- Désactivé seulement si le dev N'est PAS déjà dans l'équipe ET que
+       l'équipe est pleine : on peut toujours RETIRER un dev, même à 6/6. -->
+  <button
+    type="button"
+    [disabled]="!inTeam() && teamFull()"
+    [attr.aria-pressed]="inTeam()"
+    (click)="teamToggled.emit(dev().id)"
+  >
+    {{ inTeam() ? 'Retirer de l’équipe' : 'Ajouter à l’équipe' }}
+  </button>
+</article>

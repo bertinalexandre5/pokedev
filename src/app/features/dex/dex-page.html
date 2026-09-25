@@ -1,0 +1,59 @@
+<h1>Pokédex</h1>
+
+<form class="filters" (submit)="$event.preventDefault()">
+  <label for="search">Rechercher un dev <kbd>/</kbd></label>
+  <input
+    #searchInput
+    id="search"
+    type="search"
+    autocomplete="off"
+    placeholder="Nom, poste ou langage"
+    [formField]="searchForm.query"
+  />
+</form>
+
+<nav class="types" aria-label="Filtrer par type">
+  <a routerLink="." [queryParams]="{}" [class.active]="!selectedType()">Tous</a>
+  @for (type of types; track type) {
+    <a
+      routerLink="."
+      [queryParams]="{ type }"
+      [appTypeColor]="type"
+      [class.active]="selectedType() === type"
+      [attr.aria-current]="selectedType() === type ? 'true' : null"
+    >
+      {{ type | typeLabel }}
+    </a>
+  }
+</nav>
+
+@if (isLoading()) {
+  <p role="status">Chargement du pokédex…</p>
+} @else if (error()) {
+  <app-empty-state>
+    <p class="error">Impossible de charger le pokédex.</p>
+    <button actions type="button" (click)="reload()">Réessayer</button>
+  </app-empty-state>
+} @else {
+  <p class="muted" aria-live="polite">{{ devs().length }} dev(s)</p>
+
+  @if (devs().length > 0) {
+    <ul class="grid">
+      @for (dev of devs(); track dev.id) {
+        <li>
+          <app-dev-card
+            [dev]="dev"
+            [inTeam]="team.has(dev.id)"
+            [teamFull]="team.isFull()"
+            (teamToggled)="team.toggle($event)"
+          />
+        </li>
+      }
+    </ul>
+  } @else {
+    <app-empty-state>
+      <p>Aucun dev ne correspond à la recherche.</p>
+      <button actions type="button" (click)="resetSearch()">Effacer la recherche</button>
+    </app-empty-state>
+  }
+}

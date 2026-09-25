@@ -1,0 +1,47 @@
+<h1>Mon équipe ({{ team.size() }}/{{ maxSize }})</h1>
+
+@if (team.members().length === 0) {
+  <app-empty-state>
+    <p>Votre équipe est vide.</p>
+    <a actions routerLink="/devs">Choisir des devs dans le pokédex</a>
+  </app-empty-state>
+} @else {
+  <ul class="members">
+    @for (dev of team.members(); track dev.id) {
+      <li>
+        <app-dev-avatar [name]="dev.name" [type]="dev.types[0]" />
+        <a [routerLink]="['/devs', dev.id]">{{ dev.id | dexNumber }} {{ dev.name }}</a>
+        <button type="button" (click)="team.toggle(dev.id)">Retirer</button>
+      </li>
+    }
+  </ul>
+
+  <section aria-labelledby="coverage-title">
+    <h2 id="coverage-title">Couverture : {{ team.coverage().length }} type(s) sur 6</h2>
+    @if (missingTypes().length > 0) {
+      <p>
+        Il manque :
+        @for (type of missingTypes(); track type; let last = $last) {
+          {{ type | typeLabel }}{{ last ? '.' : ', ' }}
+        }
+      </p>
+    } @else {
+      <p>Tous les types sont couverts.</p>
+    }
+  </section>
+
+  @if (team.average(); as average) {
+    <section aria-labelledby="average-title">
+      <h2 id="average-title">
+        Moyenne de l'équipe · total {{ averageTotal() | number }} / {{ maxTotal }}
+      </h2>
+      <div class="stats">
+        @for (key of statKeys; track key) {
+          <app-stat-bar [label]="statLabels[key]" [value]="average[key]" />
+        }
+      </div>
+    </section>
+  }
+
+  <p><button type="button" (click)="team.clear()">Vider l'équipe</button></p>
+}

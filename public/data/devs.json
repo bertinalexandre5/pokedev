@@ -1,0 +1,462 @@
+[
+  {
+    "id": 1,
+    "name": "Stagiairon",
+    "title": "Stagiaire front-end",
+    "types": [
+      "frontend"
+    ],
+    "stats": {
+      "code": 35,
+      "debug": 20,
+      "archi": 10,
+      "tests": 15,
+      "communication": 40,
+      "cafe": 60
+    },
+    "languages": [
+      "HTML",
+      "CSS"
+    ],
+    "catchphrase": "Ça marche sur ma machine.",
+    "evolvesTo": 2
+  },
+  {
+    "id": 2,
+    "name": "Juniorax",
+    "title": "Développeur front-end junior",
+    "types": [
+      "frontend"
+    ],
+    "stats": {
+      "code": 55,
+      "debug": 40,
+      "archi": 25,
+      "tests": 35,
+      "communication": 50,
+      "cafe": 70
+    },
+    "languages": [
+      "HTML",
+      "CSS",
+      "TypeScript"
+    ],
+    "catchphrase": "J'ai trouvé la réponse sur un forum.",
+    "evolvesTo": 3
+  },
+  {
+    "id": 3,
+    "name": "Seniorgon",
+    "title": "Développeur front-end senior",
+    "types": [
+      "frontend"
+    ],
+    "stats": {
+      "code": 80,
+      "debug": 75,
+      "archi": 65,
+      "tests": 70,
+      "communication": 60,
+      "cafe": 65
+    },
+    "languages": [
+      "TypeScript",
+      "Angular",
+      "CSS"
+    ],
+    "catchphrase": "Ça dépend."
+  },
+  {
+    "id": 4,
+    "name": "Scriptilou",
+    "title": "Stagiaire back-end",
+    "types": [
+      "backend"
+    ],
+    "stats": {
+      "code": 40,
+      "debug": 25,
+      "archi": 15,
+      "tests": 10,
+      "communication": 30,
+      "cafe": 55
+    },
+    "languages": [
+      "PHP"
+    ],
+    "catchphrase": "Pourquoi il y a une table users2 ?",
+    "evolvesTo": 5
+  },
+  {
+    "id": 5,
+    "name": "Apirex",
+    "title": "Développeur API",
+    "types": [
+      "backend"
+    ],
+    "stats": {
+      "code": 60,
+      "debug": 50,
+      "archi": 40,
+      "tests": 45,
+      "communication": 40,
+      "cafe": 65
+    },
+    "languages": [
+      "Java",
+      "SQL"
+    ],
+    "catchphrase": "Tout est une ressource REST.",
+    "evolvesTo": 6
+  },
+  {
+    "id": 6,
+    "name": "Monolitor",
+    "title": "Architecte back-end",
+    "types": [
+      "backend"
+    ],
+    "stats": {
+      "code": 75,
+      "debug": 70,
+      "archi": 85,
+      "tests": 65,
+      "communication": 55,
+      "cafe": 60
+    },
+    "languages": [
+      "Java",
+      "Kotlin",
+      "SQL"
+    ],
+    "catchphrase": "On découpera en microservices plus tard."
+  },
+  {
+    "id": 7,
+    "name": "Yamlou",
+    "title": "Stagiaire DevOps",
+    "types": [
+      "devops"
+    ],
+    "stats": {
+      "code": 30,
+      "debug": 35,
+      "archi": 20,
+      "tests": 15,
+      "communication": 35,
+      "cafe": 60
+    },
+    "languages": [
+      "YAML",
+      "Bash"
+    ],
+    "catchphrase": "Il manque un espace ligne 42.",
+    "evolvesTo": 8
+  },
+  {
+    "id": 8,
+    "name": "Kubernaute",
+    "title": "Ingénieur DevOps",
+    "types": [
+      "devops"
+    ],
+    "stats": {
+      "code": 55,
+      "debug": 60,
+      "archi": 50,
+      "tests": 40,
+      "communication": 40,
+      "cafe": 65
+    },
+    "languages": [
+      "YAML",
+      "Go",
+      "Bash"
+    ],
+    "catchphrase": "Redémarre le pod.",
+    "evolvesTo": 9
+  },
+  {
+    "id": 9,
+    "name": "Clustarque",
+    "title": "Ingénieur plateforme",
+    "types": [
+      "devops"
+    ],
+    "stats": {
+      "code": 70,
+      "debug": 80,
+      "archi": 80,
+      "tests": 60,
+      "communication": 50,
+      "cafe": 60
+    },
+    "languages": [
+      "Go",
+      "Terraform",
+      "Bash"
+    ],
+    "catchphrase": "La prod, c'est mon jardin."
+  },
+  {
+    "id": 10,
+    "name": "Tabulis",
+    "title": "Analyste de données",
+    "types": [
+      "data"
+    ],
+    "stats": {
+      "code": 40,
+      "debug": 35,
+      "archi": 30,
+      "tests": 30,
+      "communication": 55,
+      "cafe": 50
+    },
+    "languages": [
+      "SQL",
+      "Python"
+    ],
+    "catchphrase": "Tu as regardé la médiane ?",
+    "evolvesTo": 11
+  },
+  {
+    "id": 11,
+    "name": "Requêtor",
+    "title": "Ingénieur data",
+    "types": [
+      "data",
+      "backend"
+    ],
+    "stats": {
+      "code": 65,
+      "debug": 60,
+      "archi": 60,
+      "tests": 50,
+      "communication": 45,
+      "cafe": 55
+    },
+    "languages": [
+      "SQL",
+      "Python",
+      "Scala"
+    ],
+    "catchphrase": "Ajoute un index."
+  },
+  {
+    "id": 12,
+    "name": "Swipio",
+    "title": "Développeur mobile",
+    "types": [
+      "mobile"
+    ],
+    "stats": {
+      "code": 60,
+      "debug": 50,
+      "archi": 40,
+      "tests": 35,
+      "communication": 50,
+      "cafe": 60
+    },
+    "languages": [
+      "Kotlin",
+      "Swift"
+    ],
+    "catchphrase": "Sur Android, ça passe."
+  },
+  {
+    "id": 13,
+    "name": "Notifox",
+    "title": "Développeur mobile hybride",
+    "types": [
+      "mobile",
+      "frontend"
+    ],
+    "stats": {
+      "code": 55,
+      "debug": 45,
+      "archi": 45,
+      "tests": 40,
+      "communication": 60,
+      "cafe": 55
+    },
+    "languages": [
+      "TypeScript",
+      "Dart"
+    ],
+    "catchphrase": "Un seul code, deux stores."
+  },
+  {
+    "id": 14,
+    "name": "Chiffrinou",
+    "title": "Analyste sécurité",
+    "types": [
+      "securite"
+    ],
+    "stats": {
+      "code": 45,
+      "debug": 55,
+      "archi": 40,
+      "tests": 45,
+      "communication": 45,
+      "cafe": 50
+    },
+    "languages": [
+      "Python",
+      "Bash"
+    ],
+    "catchphrase": "Ton mot de passe est dans le dépôt.",
+    "evolvesTo": 15
+  },
+  {
+    "id": 15,
+    "name": "Pare-Feulin",
+    "title": "Ingénieur sécurité",
+    "types": [
+      "securite",
+      "devops"
+    ],
+    "stats": {
+      "code": 60,
+      "debug": 70,
+      "archi": 65,
+      "tests": 55,
+      "communication": 40,
+      "cafe": 55
+    },
+    "languages": [
+      "Go",
+      "Bash",
+      "Rust"
+    ],
+    "catchphrase": "Tout est fermé par défaut."
+  },
+  {
+    "id": 16,
+    "name": "Pixelle",
+    "title": "Intégratrice",
+    "types": [
+      "frontend"
+    ],
+    "stats": {
+      "code": 55,
+      "debug": 40,
+      "archi": 30,
+      "tests": 35,
+      "communication": 65,
+      "cafe": 50
+    },
+    "languages": [
+      "HTML",
+      "CSS"
+    ],
+    "catchphrase": "Il manque deux pixels à gauche."
+  },
+  {
+    "id": 17,
+    "name": "Nullos",
+    "title": "Développeur back-end",
+    "types": [
+      "backend"
+    ],
+    "stats": {
+      "code": 50,
+      "debug": 70,
+      "archi": 35,
+      "tests": 40,
+      "communication": 35,
+      "cafe": 70
+    },
+    "languages": [
+      "Java",
+      "C#"
+    ],
+    "catchphrase": "Cannot read properties of null."
+  },
+  {
+    "id": 18,
+    "name": "Commitor",
+    "title": "Gardien du dépôt",
+    "types": [
+      "devops"
+    ],
+    "stats": {
+      "code": 50,
+      "debug": 55,
+      "archi": 45,
+      "tests": 50,
+      "communication": 60,
+      "cafe": 55
+    },
+    "languages": [
+      "Git",
+      "Bash"
+    ],
+    "catchphrase": "Un commit, une intention."
+  },
+  {
+    "id": 19,
+    "name": "Mergeon",
+    "title": "Responsable intégration continue",
+    "types": [
+      "devops",
+      "backend"
+    ],
+    "stats": {
+      "code": 55,
+      "debug": 60,
+      "archi": 55,
+      "tests": 75,
+      "communication": 45,
+      "cafe": 50
+    },
+    "languages": [
+      "YAML",
+      "Java"
+    ],
+    "catchphrase": "La CI est rouge."
+  },
+  {
+    "id": 20,
+    "name": "Datalga",
+    "title": "Data scientist",
+    "types": [
+      "data"
+    ],
+    "stats": {
+      "code": 60,
+      "debug": 45,
+      "archi": 45,
+      "tests": 40,
+      "communication": 50,
+      "cafe": 65
+    },
+    "languages": [
+      "Python",
+      "R"
+    ],
+    "catchphrase": "Corrélation n'est pas causalité."
+  },
+  {
+    "id": 21,
+    "name": "Captchat",
+    "title": "Développeur sécurité front",
+    "types": [
+      "securite",
+      "frontend"
+    ],
+    "stats": {
+      "code": 55,
+      "debug": 50,
+      "archi": 40,
+      "tests": 50,
+      "communication": 45,
+      "cafe": 60
+    },
+    "languages": [
+      "TypeScript",
+      "CSS"
+    ],
+    "catchphrase": "Prouvez que vous n'êtes pas un robot."
+  }
+]
