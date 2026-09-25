@@ -1,4 +1,4 @@
-import { isDev, parseDevs } from './dev-validation';
+import { isDev, isDevType, parseDevs } from './dev-validation';
 
 const valid = {
   id: 1,
@@ -23,8 +23,28 @@ describe('isDev', () => {
     ['trois types', { ...valid, types: ['frontend', 'backend', 'data'] }],
     ['une statistique manquante', { ...valid, stats: { code: 1 } }],
     ['un langage non textuel', { ...valid, languages: [42] }],
+    ['aucun type', { ...valid, types: [] }],
+    ['un nom manquant', { ...valid, name: undefined }],
+    ['une phrase fétiche manquante', { ...valid, catchphrase: undefined }],
+    ['des statistiques absentes', { ...valid, stats: null }],
+    ['une statistique texte', { ...valid, stats: { ...valid.stats, cafe: '60' } }],
+    ['une évolution texte', { ...valid, evolvesTo: '2' }],
   ])('refuse %s', (_label, value) => {
     expect(isDev(value)).toBe(false);
+  });
+
+  it('accepte un dev sans évolution', () => {
+    expect(isDev({ ...valid, evolvesTo: undefined })).toBe(true);
+  });
+});
+
+describe('isDevType', () => {
+  it.each(['frontend', 'securite'])('accepte « %s »', (value) => {
+    expect(isDevType(value)).toBe(true);
+  });
+
+  it.each(['cobol', 'Frontend', 42, undefined])('refuse %s', (value) => {
+    expect(isDevType(value)).toBe(false);
   });
 });
 

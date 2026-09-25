@@ -1,6 +1,6 @@
 import { Service, computed, inject } from '@angular/core';
 import { httpResource } from '@angular/common/http';
-import { Dev } from '../../domain/dev.model';
+import { Dev, DevInfo } from '../../domain/dev.model';
 import { nextId } from '../../domain/dev-rules';
 import { persistedSignal } from '../storage/persisted-signal';
 import { isDev, parseDevs } from './dev-validation';
@@ -12,7 +12,11 @@ function isDevList(value: unknown): value is Dev[] {
   return Array.isArray(value) && value.every(isDev);
 }
 
-/** Source unique des devs : ceux du fichier JSON et ceux créés par l'utilisateur. */
+/**
+ * Source unique des devs : ceux du fichier JSON et ceux créés par l'utilisateur.
+ * Les devs du fichier JSON sont en lecture seule : seuls les devs personnalisés
+ * peuvent être modifiés ou supprimés.
+ */
 @Service()
 export class DevRepository {
   private readonly url = inject(DEVS_URL);
@@ -26,10 +30,9 @@ export class DevRepository {
    * Lire value() d'une ressource en erreur lève une exception :
    * on vérifie hasValue() avant, pour garder les devs personnalisés affichables.
    */
-  readonly devs = computed(() => [
-    ...(this.remote.hasValue() ? this.remote.value() : []),
-    ...this.custom(),
-  ]);
+  private readonly remoteDevs = computed(() => (this.remote.hasValue() ? this.remote.value() : []));
+
+  readonly devs = computed(() => [...this.remoteDevs(), ...this.custom()]);
   readonly isLoading = this.remote.isLoading;
   readonly error = this.remote.error;
 
@@ -38,10 +41,23 @@ export class DevRepository {
   }
 
   /** Ajoute un dev créé par l'utilisateur et renvoie son numéro. */
-  add(dev: Omit<Dev, 'id' | 'custom'>): number {
+  add(dev: DevInfo): number {
     const id = nextId(this.devs());
     this.custom.update((devs) => [...devs, { ...dev, id, custom: true }]);
     return id;
+  }
+
+  /**
+   * Remplace les informations d'un dev personnalisé ; sans effet sur un dev du fichier JSON.
+   * Les informations absentes de `info` (l'évolution) sont conservées.
+   */
+  update(id: number, info: DevInfo): void {
+    this.custom.update((devs) => devs.map((dev) => (dev.id === id ? { ...dev, ...info } : dev)));
+  }
+
+  /** Retire un dev personnalisé du pokédex ; sans effet sur un dev du fichier JSON. */
+  remove(id: number): void {
+    this.custom.update((devs) => devs.filter((dev) => dev.id !== id));
   }
 
   reload(): void {

@@ -48,7 +48,8 @@ describe('unsavedChangesGuard', () => {
   });
 
   it("suit la réponse de l'utilisateur sinon", () => {
-    vi.spyOn(window, 'confirm').mockReturnValue(false);
+    const confirmSpy = vi.spyOn(window, 'confirm').mockReturnValue(false);
     expect(run(true)).toBe(false);
+    expect(confirmSpy).toHaveBeenCalled();
   });
 });

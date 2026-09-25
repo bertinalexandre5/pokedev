@@ -1,9 +1,6 @@
-// Les libellés affichés à l'écran (en français), séparés du code technique.
-// DevType et StatKey restent des mots-clés internes ('frontend', 'code'...) ;
-// ces objets font la traduction vers ce que voit l'utilisateur.
 import { DevType, StatKey } from './dev.model';
+import { WeatherAdvice } from './weather';
 
-// Utilisé par TypeLabelPipe : {{ 'securite' | typeLabel }} → "Sécurité".
 export const TYPE_LABELS: Record<DevType, string> = {
   frontend: 'Front-end',
   backend: 'Back-end',
@@ -13,7 +10,6 @@ export const TYPE_LABELS: Record<DevType, string> = {
   securite: 'Sécurité',
 };
 
-// Utilisé par la fiche d'un dev pour nommer chaque barre de statistique.
 export const STAT_LABELS: Record<StatKey, string> = {
   code: 'Code',
   debug: 'Debug',
@@ -21,4 +17,10 @@ export const STAT_LABELS: Record<StatKey, string> = {
   tests: 'Tests',
   communication: 'Communication',
   cafe: 'Café',
+};
+
+export const ADVICE_LABELS: Record<WeatherAdvice, string> = {
+  'go-out': 'Sortez vos devs !',
+  'keep-cool': 'Gardez vos devs au frais',
+  'stay-inside': 'Gardez vos devs à l’intérieur',
 };

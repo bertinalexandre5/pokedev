@@ -2,8 +2,6 @@ import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { EmptyState } from '../../shared/ui/empty-state';
 
-// Affichée pour toute URL inconnue (route '**' dans app.routes.ts),
-// et par la garde devIdGuard quand /devs/:id reçoit un id invalide.
 @Component({
   selector: 'app-not-found-page',
   imports: [RouterLink, EmptyState],

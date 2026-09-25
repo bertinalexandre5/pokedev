@@ -11,6 +11,8 @@ describe('CreateDevPage', () => {
   let element: HTMLElement;
   let component: CreateDevPage;
 
+  const stable = () => TestBed.inject(ApplicationRef).whenStable();
+
   beforeEach(async () => {
     localStorage.clear();
     TestBed.configureTestingModule({
@@ -23,8 +25,6 @@ describe('CreateDevPage', () => {
     TestBed.inject(HttpTestingController).expectOne('data/devs.json').flush(TEST_DEVS);
     await stable();
   });
-
-  const stable = () => TestBed.inject(ApplicationRef).whenStable();
 
   async function type(selector: string, value: string): Promise<void> {
     const field = element.querySelector<HTMLInputElement | HTMLSelectElement>(selector)!;
@@ -40,6 +40,23 @@ describe('CreateDevPage', () => {
   it('est invalide au départ', () => {
     expect(submitButton().disabled).toBe(true);
     expect(component.hasUnsavedChanges()).toBe(false);
+  });
+
+  it("n'affiche aucune erreur avant que l'utilisateur ne saisisse", () => {
+    expect(element.querySelectorAll('.error')).toHaveLength(0);
+  });
+
+  it('propose d’ajouter le dev au pokédex', () => {
+    expect(submitButton().textContent?.trim()).toBe('Ajouter au pokédex');
+  });
+
+  it('affiche le total des statistiques en direct', async () => {
+    const legend = () => element.querySelector('legend')?.textContent?.trim();
+    expect(legend()).toBe('Statistiques · total 300/420');
+
+    await type('#stat-code', '90');
+
+    expect(legend()).toBe('Statistiques · total 340/420');
   });
 
   it('refuse un nom déjà pris', async () => {
@@ -75,5 +92,29 @@ describe('CreateDevPage', () => {
     expect(created?.languages).toEqual(['Java', 'Gherkin']);
     expect(navigate).toHaveBeenCalledWith(['/devs', 12]);
     expect(component.hasUnsavedChanges()).toBe(false);
+  });
+
+  it('exige un nom assez long, un poste et au moins un langage', async () => {
+    await type('#name', 'T');
+    await type('#title', '');
+    await type('#languages', ' , ');
+
+    expect(element.textContent).toContain('Au moins 2 caractères.');
+    expect(element.textContent).toContain('Le poste est obligatoire.');
+    expect(element.textContent).toContain('Indiquez au moins un langage.');
+  });
+
+  it('borne chaque statistique entre 0 et 100', async () => {
+    await type('#stat-code', '-1');
+    await type('#stat-debug', '101');
+
+    expect(element.textContent).toContain('Minimum : 0.');
+    expect(element.textContent).toContain('Maximum : 100.');
+  });
+
+  it('limite la phrase fétiche à 120 caractères', async () => {
+    await type('#catchphrase', 'a'.repeat(121));
+
+    expect(element.textContent).toContain('Au plus 120 caractères.');
   });
 });

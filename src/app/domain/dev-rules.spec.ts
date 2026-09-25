@@ -20,11 +20,12 @@ const stats = (value: number, overrides: Partial<DevStats> = {}): DevStats => ({
   ...overrides,
 });
 
-const dev = (overrides: Partial<Dev>): Dev => ({
+const dev = (overrides: Partial<Dev> = {}): Dev => ({
   id: 1,
   name: 'Stagiairon',
   title: 'Stagiaire front',
   types: ['frontend'],
+  progression: 300,
   stats: stats(50),
   languages: ['HTML', 'CSS'],
   catchphrase: 'Ça marche sur ma machine.',
